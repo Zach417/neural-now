@@ -1,5 +1,5 @@
 var http = require('http');
-var NeuralNetwork = require('./models/neuralnetwork');
+var NeuralNetwork = require('neural-network').NeuralNetwork;
 
 var NeuralNow = {
   get: function (id, callback) {
