@@ -54,7 +54,7 @@ NeuralNow.get("test", function(neuralNet) {
 The `neuralNet` parameter of the callback function contains information about the neural network as well as a `forward()` function, which propagates data through the network. The `input` array below is defined by the user and must match the size of the input layer of the neural network.
 ```js
 NeuralNow.get("test", function(neuralNet) {
-    var input = [0,1,0];
+    var input = [[0,1,0]];
     var output = neuralNet.forward(input);
     console.log(output);
 });
