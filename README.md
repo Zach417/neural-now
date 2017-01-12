@@ -1,12 +1,12 @@
 # Neural Now
-Online neural network sharing and hosting. Deploy someone else's neural network in seconds.
+Online neural network sharing and hosting. Deploy someone else's trained neural network in seconds.
 
 The next Mark Zuckerberg won't build Facebook. He or she will probably build a really cool personal robot that can take my dog out to go pee while I'm at work. Neural Now is a tool to make it as easy as possible for the dorm room hacker to build the next wave of AI-powered tooling and services.
 
 # Installation
 After you've installed node.js, install Neural Now with the following npm command.
 ```sh
-$ npm install neural-now --save
+$ npm i neural-now
 ```
 To deploy your first neural net, use the `NeuralNow.get()` function.
 ```js
