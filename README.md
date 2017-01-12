@@ -12,7 +12,7 @@ To deploy your first neural net, use the `NeuralNow.get()` function.
 ```js
 var NeuralNow = require('neural-now');
 NeuralNow.get("test", function(neuralNet) {
-    var input = [0,1,0];
+    var input = [[0,1,0]];
     var output = neuralNet.forward(input);
     console.log(output);
 });
