@@ -9,8 +9,7 @@
   "author": "Zach Allen",
   "license": "ISC",
   "dependencies": {
-    "neural-network": "^1.0.0",
-    "numjs": "^0.12.3"
+    "neural-network": "^1.0.1"
   },
   "directories": {
     "test": "test"
