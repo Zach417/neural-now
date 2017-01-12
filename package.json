@@ -1,14 +1,27 @@
 {
   "name": "neural-now",
   "version": "1.0.0",
-  "description": "",
+  "description": "Online neural network sharing and hosting. Deploy someone else's trained neural network in seconds.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Zach Allen",
   "license": "ISC",
   "dependencies": {
+    "neural-network": "^1.0.0",
     "numjs": "^0.12.3"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zach417/neural-now.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Zach417/neural-now/issues"
+  },
+  "homepage": "https://github.com/Zach417/neural-now#readme"
 }
