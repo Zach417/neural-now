@@ -4,7 +4,7 @@ var NeuralNetwork = require('neural-network').NeuralNetwork;
 var NeuralNow = {
   get: function (id, callback) {
     var options = {
-      host: "localhost",
+      host: "api.neuralnow.com",
       port: 80,
       path: "/neuralnetwork/" + id
     }
