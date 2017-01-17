@@ -1,6 +1,6 @@
 {
   "name": "neural-now",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Online neural network sharing and hosting. Deploy someone else's trained neural network in seconds.",
   "main": "index.js",
   "scripts": {
