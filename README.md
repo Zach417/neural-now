@@ -100,10 +100,13 @@ console.log(neuralNet.input);
 }
 ```
 # To Do List
-1. Deploy API server
-2. Deploy web server
-3. Configure user authentication
-4. Develop neural network submission page on web app with a playground-style engine to manipulate and display the network
-5. Gather and submit trained neural networks that would be useful to most web developers -- image classification, text sentiment analysis, etc.
-6. Add python support
-7. Submit on Hacker News
+1. Develop neural network submission page on web app with a playground-style engine to manipulate and display the network
+2. Gather and submit trained neural networks that would be useful to most web developers -- image classification, text sentiment analysis, etc.
+3. Add python support
+4. Submit on Hacker News
+
+# Neural Networks to Build
+1. Predict whether a given user will become a paying customer, based on her activities during the first day/week/month.
+2. Image to text parsing.
+3. Support email classification: bug report, new feature request, etc.
+4. Spam comment detection
