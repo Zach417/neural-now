@@ -1,5 +1,5 @@
 var http = require('http');
-var NeuralNetwork = require('neural-network').NeuralNetwork;
+var cnn = require('neural-now-cnn');
 
 var NeuralNow = {
   get: function (id, callback) {
@@ -18,9 +18,9 @@ var NeuralNow = {
 
       resp.on('end', function () {
         var json = JSON.parse(chunks);
-        var neuralNetwork = new NeuralNetwork();
-        neuralNetwork.generate(json);
-        callback(neuralNetwork);
+        var net = new cnn.net();
+        net.fromJSON(json);
+        callback(net);
       });
     }).on("error", function (err) {
       console.log("Error connecting to Neural Now: " + err.message);
