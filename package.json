@@ -1,6 +1,6 @@
 {
   "name": "neural-now",
-  "version": "1.0.2",
+  "version": "1.1.1",
   "description": "Online neural network sharing and hosting. Deploy someone else's trained neural network in seconds.",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,8 @@
   "author": "Zach Allen",
   "license": "ISC",
   "dependencies": {
-    "neural-network": "^1.0.3"
+    "neural-now-cnn": "^0.1.1",
+    "neural-now-utils": "^1.0.1"
   },
   "directories": {
     "test": "test"
