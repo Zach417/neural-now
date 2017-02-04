@@ -12,6 +12,33 @@ function getOptions (id) {
 
 var NeuralNow = {
   get: function (id, callback) {
+    function _get () {
+      var options = getOptions(id);
+      http.get(options, function (resp) {
+
+        var chunks = "";
+        resp.on('data', function (chunk) {
+          chunks += chunk;
+        });
+
+        resp.on('end', function () {
+          var json = JSON.parse(chunks);
+          var net = new cnn.net();
+          net.fromJSON(json);
+          callback(net);
+
+          fs.writeFile(netPath, JSON.stringify(json), function (err) {
+            if (err) {
+              console.log("Error saving file: " + err.message);
+              return;
+            }
+          });
+
+        });
+      }).on("error", function (err) {
+        console.log("Error connecting to Neural Now: " + err.message);
+      });
+    }
 
     var netPath = __dirname + "/models/" + id + ".json";
     if (fs.existsSync(netPath)) {
@@ -22,37 +49,17 @@ var NeuralNow = {
         }
 
         var net = new cnn.net();
-        net.fromJSON(JSON.parse(data));
-        callback(net);
+        try {
+          net.fromJSON(JSON.parse(data));
+          callback(net);
+        } catch (err) {
+          _get();
+        }
       });
       return;
     }
-    
-    var options = getOptions(id);
-    http.get(options, function (resp) {
 
-      var chunks = "";
-      resp.on('data', function (chunk) {
-        chunks += chunk;
-      });
-
-      resp.on('end', function () {
-        var json = JSON.parse(chunks);
-        var net = new cnn.net();
-        net.fromJSON(json);
-        callback(net);
-
-        fs.writeFile(netPath, JSON.stringify(json), function (err) {
-          if (err) {
-            console.log("Error saving file: " + err.message);
-            return;
-          }
-        });
-
-      });
-    }).on("error", function (err) {
-      console.log("Error connecting to Neural Now: " + err.message);
-    });
+    _get();
   }
 }
 

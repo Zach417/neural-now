@@ -1,11 +1,12 @@
 var NeuralNow = require('../../index.js');
 var NeuralNowUtils = require('neural-now-utils');
-NeuralNow.get('image-classification-20', function (net) {
+
+NeuralNow.get('cifar-10', function(neuralNet) {
   NeuralNowUtils.Image.resizeToVector({
-    size: [224, 224, 3], // 224 (width) x 224 (height) x 3 (RGB)
+    size: [32, 32, 3],
     path: __dirname + "/test.jpg", // set input values here
     callback: function (vector) {
-      var output = net.forward(vector).w;
+      var output = neuralNet.forward(vector).w;
       console.log(output);
     },
   });
