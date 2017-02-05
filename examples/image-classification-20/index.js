@@ -5,7 +5,7 @@ NeuralNow.get('image-classification-20', function (net) {
     size: [224, 224, 3], // 224 (width) x 224 (height) x 3 (RGB)
     path: __dirname + "/test.jpg", // set input values here
     callback: function (vector) {
-      var output = net.forward(vector).w;
+      var output = NeuralNow.parseOutput(net, net.forward(vector).w);
       console.log(output);
     },
   });

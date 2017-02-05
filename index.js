@@ -25,6 +25,8 @@ var NeuralNow = {
           var json = JSON.parse(chunks);
           var net = new cnn.net();
           net.fromJSON(json);
+          net.name = json.name;
+          net.outputClasses = json.outputClasses;
           callback(net);
 
           fs.writeFile(netPath, JSON.stringify(json), function (err) {
@@ -60,7 +62,26 @@ var NeuralNow = {
     }
 
     _get();
-  }
+  },
+
+  parseOutput: function (net, output) {
+    var result = [];
+    if (output.length > 0 && net.outputClasses.length > 0) {
+      for (var i = 0; i < output.length; i++) {
+        result.push({
+          class: net.outputClasses[i],
+          prediction: output[i],
+        });
+      }
+      // descending
+      result.sort(function (a, b) {
+        return b.prediction - a.prediction;
+      });
+      return result;
+    } else {
+      return output;
+    }
+  },
 }
 
 module.exports = NeuralNow;
