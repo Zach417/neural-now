@@ -2,8 +2,7 @@ var http = require('http');
 var request = require('request');
 
 function apiWrapper () {
-  this.host = "localhost";
-  //this.host = "api.neuralnow.com";
+  this.host = "api.neuralnow.com";
   this.port = 80;
 
   this.get = function (path, callback) {
@@ -32,7 +31,7 @@ function apiWrapper () {
 
   this.post = function (path, body, callback) {
     request({
-      url: "http://" + this.host + ":8080" + path,
+      url: "http://" + this.host + path,
       method: "POST",
       json: body,
     }, function (err, message, response) {
