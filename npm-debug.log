@@ -1,0 +1,111 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish' ]
+2 info using npm@2.15.0
+3 info using node@v4.4.2
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: 'C:\\Users\\zallen\\Documents\\GitHub\\neural-now',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory C:\Users\zallen\AppData\Roaming\npm-cache\neural-now\1.1.2\package.tgz not in flight; packing
+9 verbose correctMkdir C:\Users\zallen\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+10 verbose tar pack [ 'C:\\Users\\zallen\\AppData\\Roaming\\npm-cache\\neural-now\\1.1.2\\package.tgz',
+10 verbose tar pack   'C:\\Users\\zallen\\Documents\\GitHub\\neural-now' ]
+11 verbose tarball C:\Users\zallen\AppData\Roaming\npm-cache\neural-now\1.1.2\package.tgz
+12 verbose folder C:\Users\zallen\Documents\GitHub\neural-now
+13 info prepublish neural-now@1.1.2
+14 verbose addLocalTarball adding from inside cache C:\Users\zallen\AppData\Roaming\npm-cache\neural-now\1.1.2\package.tgz
+15 verbose correctMkdir C:\Users\zallen\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+16 silly cache afterAdd neural-now@1.1.2
+17 verbose afterAdd C:\Users\zallen\AppData\Roaming\npm-cache\neural-now\1.1.2\package\package.json not in flight; writing
+18 verbose correctMkdir C:\Users\zallen\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+19 verbose afterAdd C:\Users\zallen\AppData\Roaming\npm-cache\neural-now\1.1.2\package\package.json written
+20 silly publish { name: 'neural-now',
+20 silly publish   version: '1.1.2',
+20 silly publish   description: 'Online neural network sharing and hosting. Deploy someone else\'s trained neural network in seconds.',
+20 silly publish   main: 'index.js',
+20 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+20 silly publish   author: { name: 'Zach Allen' },
+20 silly publish   license: 'ISC',
+20 silly publish   dependencies:
+20 silly publish    { 'neural-now-cnn': '^0.1.1',
+20 silly publish      'neural-now-utils': '^1.1.3',
+20 silly publish      request: '^2.79.0' },
+20 silly publish   directories: { test: 'test' },
+20 silly publish   devDependencies: {},
+20 silly publish   repository:
+20 silly publish    { type: 'git',
+20 silly publish      url: 'git+https://github.com/Zach417/neural-now.git' },
+20 silly publish   bugs: { url: 'https://github.com/Zach417/neural-now/issues' },
+20 silly publish   homepage: 'https://github.com/Zach417/neural-now#readme',
+20 silly publish   readme: '# Neural Now\r\nNeural Now is a neural network sharing service that makes it possible to deploy someone else\'s trained neural network in seconds. It\'s by far the easiest way to leverage machine learning in your own tools and services.\r\n\r\nThis is how you can deploy an image classification model in under 10 lines of code.\r\n```js\r\nvar NeuralNow = require(\'neural-now\');\r\nvar NeuralNowUtil = require(\'neural-now-util\');\r\n\r\nNeuralNow.get("image-classification", function(neuralNet) {\r\n    var image = NeuralNowUtil.image.fileToVector(\'dog.png\');\r\n    var prediction = neuralNet.forward(image);\r\n    console.log(prediction);\r\n});\r\n```\r\n```sh\r\n>>> Dog\r\n```\r\nNeural Now currently supports deployment on Node.js and Python applications via npm and pip packages, with plans to develop C#, Java, and Swift libraries in the near future.\r\n## Mission\r\nMy mission is to make it possible for the next Zuckerberg to build something profoundly useful.\r\n\r\nThe next Mark Zuckerberg won\'t build Facebook, according to Peter Theil. The world doesn\'t need another social network app. The next dorm room hacker will build a humanoid robot that cleans your house while you\'re at work or even a chat bot capable of filing your taxes. Whatever it is, it will require open access to state of the art AI, and I\'m going to make sure they have it. Neural Now is a service that will power the next wave of Pages, Brins, and Zuckerburgs by giving them access to hundreds of neural networks, each trained to solve specific domain problems.\r\n\r\n## Installation - Node.js\r\nAfter you\'ve installed Node.js, install Neural Now with the following npm command.\r\n```sh\r\n$ npm i neural-now\r\n```\r\nTo deploy your first neural net, use the `NeuralNow.get()` function.\r\n```js\r\nvar NeuralNow = require(\'neural-now\');\r\nNeuralNow.get("sine", function(neuralNet) {\r\n    var input = Math.PI / 3;\r\n    var output = neuralNet.forward(input);\r\n    console.log(output);\r\n});\r\n```\r\n```sh\r\n>>> 0.86602540378\r\n```\r\nAny public neural network on Neural Now can be deployed by replacing `"sine"` in the above snippet with the appropriate `id` of the network. Of course, don\'t forget that the `input` must match the neural network\'s specifications and the `output` will also vary accordingly!\r\n\r\n## Under the hood\r\nThe function `NeuralNow.get()` makes a request to `https://neuralnow.com/api/:id`, which responds with a json object describing the neural network `:id`.\r\n\r\nThis is the JSON object response used in the example above.\r\n```json\r\n{\r\n  "name": "sine",\r\n  "input": {\r\n    "size": 1,\r\n    "activation": "linear",\r\n  },\r\n  "hidden": [{\r\n    "size": 6,\r\n    "activation": "hyperbolic-tangent",\r\n  }, {\r\n    "size": 6,\r\n    "activation": "hyperbolic-tangent",\r\n  }, {\r\n    "size": 6,\r\n    "activation": "hyperbolic-tangent",\r\n  }],\r\n  "output": {\r\n    "size": 1,\r\n    "activation": "hyperbolic-tangent",\r\n  },\r\n  "weights": [[[1,1,1],[1,1,1],[1,1,1]],[[1],[1],[1]]]\r\n}\r\n```\r\n\r\nThis information is used to generate the neural network on the client for purposes of propagating user-defined inputs.\r\n\r\nThe generated neural network is passed as a parameter of the callback function in `NeuralNow.get()`, which I\'ve defined as `neuralNet` in the example below.\r\n```js\r\nNeuralNow.get("sine", function(neuralNet) {\r\n\r\n});\r\n```\r\n\r\nThe `neuralNet` parameter of the callback function contains information about the neural network as well as a `forward()` function, which propagates data through the network. The `input` below is defined by the user and must match the size of the input layer of the neural network.\r\n```js\r\nNeuralNow.get("sine", function(neuralNet) {\r\n    var input = Math.PI / 3;\r\n    var output = neuralNet.forward(input);\r\n    console.log(output);\r\n});\r\n```\r\n\r\nThe size of the layers of each network can be used by checking the related attributes of the `neuralNet` object. These attribute values will vary from network to network.\r\n```js\r\nconsole.log(neuralNet.input);\r\n```\r\n```sh\r\n{\r\n    size: 1,\r\n    activation: function (x) {\r\n        return x;\r\n    }\r\n}\r\n```\r\n# To Do List\r\n1. Develop neural network submission page on web app with a playground-style engine to manipulate and display the network\r\n2. Gather and submit trained neural networks that would be useful to most web developers -- image classification, text sentiment analysis, etc.\r\n3. Add python support\r\n4. Submit on Hacker News\r\n\r\n# Neural Networks to Build\r\n1. Predict whether a given user will become a paying customer, based on her activities during the first day/week/month.\r\n2. Image to text parsing.\r\n3. Support email classification: bug report, new feature request, etc.\r\n4. Spam comment detection\r\n',
+20 silly publish   readmeFilename: 'README.md',
+20 silly publish   gitHead: 'bd8ca7888ba49f1b024c6a171ae4258cdd849189',
+20 silly publish   _id: 'neural-now@1.1.2',
+20 silly publish   _shasum: '2f771693f732253e6a8cf2c03690fd2282827aa1',
+20 silly publish   _from: '.' }
+21 verbose getPublishConfig undefined
+22 silly mapToRegistry name neural-now
+23 silly mapToRegistry using default registry
+24 silly mapToRegistry registry https://registry.npmjs.org/
+25 silly mapToRegistry data Result {
+25 silly mapToRegistry   raw: 'neural-now',
+25 silly mapToRegistry   scope: null,
+25 silly mapToRegistry   name: 'neural-now',
+25 silly mapToRegistry   rawSpec: '',
+25 silly mapToRegistry   spec: 'latest',
+25 silly mapToRegistry   type: 'tag' }
+26 silly mapToRegistry uri https://registry.npmjs.org/neural-now
+27 verbose publish registryBase https://registry.npmjs.org/
+28 silly publish uploading C:\Users\zallen\AppData\Roaming\npm-cache\neural-now\1.1.2\package.tgz
+29 verbose request uri https://registry.npmjs.org/neural-now
+30 verbose request sending authorization for write operation
+31 info attempt registry request try #1 at 5:01:31 PM
+32 verbose request using bearer token for auth
+33 verbose request id 69c199c3339e0c2a
+34 http request PUT https://registry.npmjs.org/neural-now
+35 http 403 https://registry.npmjs.org/neural-now
+36 verbose headers { 'content-type': 'application/json',
+36 verbose headers   'cache-control': 'max-age=300',
+36 verbose headers   'content-length': '95',
+36 verbose headers   'accept-ranges': 'bytes',
+36 verbose headers   date: 'Thu, 09 Feb 2017 23:01:32 GMT',
+36 verbose headers   via: '1.1 varnish',
+36 verbose headers   connection: 'keep-alive',
+36 verbose headers   'x-served-by': 'cache-dfw1841-DFW',
+36 verbose headers   'x-cache': 'MISS',
+36 verbose headers   'x-cache-hits': '0',
+36 verbose headers   'x-timer': 'S1486681291.419138,VS0,VE817',
+36 verbose headers   vary: 'Accept-Encoding' }
+37 verbose request invalidating C:\Users\zallen\AppData\Roaming\npm-cache\registry.npmjs.org\neural-now on PUT
+38 error publish Failed PUT 403
+39 verbose stack Error: "You cannot publish over the previously published version 1.1.2." : neural-now
+39 verbose stack     at makeError (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:264:12)
+39 verbose stack     at CachingRegistryClient.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:252:14)
+39 verbose stack     at Request._callback (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:172:14)
+39 verbose stack     at Request.self.callback (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:199:22)
+39 verbose stack     at emitTwo (events.js:87:13)
+39 verbose stack     at Request.emit (events.js:172:7)
+39 verbose stack     at Request.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1036:10)
+39 verbose stack     at emitOne (events.js:82:20)
+39 verbose stack     at Request.emit (events.js:169:7)
+39 verbose stack     at IncomingMessage.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:963:12)
+40 verbose statusCode 403
+41 verbose pkgid neural-now
+42 verbose cwd C:\Users\zallen\Documents\GitHub\neural-now
+43 error Windows_NT 6.1.7601
+44 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "publish"
+45 error node v4.4.2
+46 error npm  v2.15.0
+47 error code E403
+48 error "You cannot publish over the previously published version 1.1.2." : neural-now
+49 error If you need help, you may report this error at:
+49 error     <https://github.com/npm/npm/issues>
+50 verbose exit [ 1, true ]
