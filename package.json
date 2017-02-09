@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "neural-now-cnn": "^0.1.1",
-    "neural-now-utils": "^1.0.1"
+    "neural-now-utils": "^1.1.3",
+    "request": "^2.79.0"
   },
   "directories": {
     "test": "test"

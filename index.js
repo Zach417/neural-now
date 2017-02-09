@@ -1,44 +1,32 @@
 var fs = require('fs');
 var http = require('http');
 var cnn = require('neural-now-cnn');
-
-function getOptions (id) {
-  return {
-    host: "api.neuralnow.com",
-    port: 80,
-    path: "/neuralnetwork/" + id,
-  }
-}
+var wrapper = require('./apiWrapper');
 
 var NeuralNow = {
+  wrapper: new wrapper(),
+
   get: function (id, callback) {
     function _get () {
-      var options = getOptions(id);
-      http.get(options, function (resp) {
+      var path = "/neuralnetwork/" + id;
+      this.wrapper.get(path, function (net) {
+        var json = JSON.parse(chunks);
+        var net = new cnn.net();
+        net.fromJSON(json);
+        net.name = json.name;
+        net.outputClasses = json.outputClasses;
+        callback(net);
 
-        var chunks = "";
-        resp.on('data', function (chunk) {
-          chunks += chunk;
+        if (!fs.existsSync(__dirname + "/models/")){
+            fs.mkdirSync(__dirname + "/models/");
+        }
+
+        fs.writeFile(netPath, JSON.stringify(json), function (err) {
+          if (err) {
+            console.log("Error saving file: " + err.message);
+            return;
+          }
         });
-
-        resp.on('end', function () {
-          var json = JSON.parse(chunks);
-          var net = new cnn.net();
-          net.fromJSON(json);
-          net.name = json.name;
-          net.outputClasses = json.outputClasses;
-          callback(net);
-
-          fs.writeFile(netPath, JSON.stringify(json), function (err) {
-            if (err) {
-              console.log("Error saving file: " + err.message);
-              return;
-            }
-          });
-
-        });
-      }).on("error", function (err) {
-        console.log("Error connecting to Neural Now: " + err.message);
       });
     }
 
@@ -62,6 +50,13 @@ var NeuralNow = {
     }
 
     _get();
+  },
+
+  compute: function (id, input, callback) {
+    var path = "/compute/" + id;
+    this.wrapper.post(path, input, function (json) {
+      callback(json);
+    });
   },
 
   parseOutput: function (net, output) {
