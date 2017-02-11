@@ -1,5 +1,9 @@
 var http = require('http');
 var request = require('request');
+var $ = require('jquery');
+
+var isBrowser = new Function("try {return this===window;}catch(e){ return false;}");
+var isNode = new Function("try {return this===global;}catch(e){return false;}");
 
 function apiWrapper () {
   this.host = "api.neuralnow.com";
@@ -30,18 +34,38 @@ function apiWrapper () {
   }
 
   this.post = function (path, body, callback) {
-    request({
-      url: "http://" + this.host + path,
-      method: "POST",
-      json: body,
-    }, function (err, message, response) {
-      if (err) {
-        console.log("Error connecting to Neural Now: " + message);
-        return callback();
-      }
+    var url = "http://" + this.host + path;
+    var method = "POST";
 
-      callback(response);
-    });
+    if (isBrowser()) {
+      $.ajax({
+          url: url,
+          type: method,
+          contentType: "application/json",
+          data: JSON.stringify(body),
+          dataType: 'json',
+          success: function(data) {
+            callback(data);
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            console.log("XHR Status:", xhr.status);
+            console.log("Thrown Error:", thrownError);
+          }
+      });
+    } else {
+      request({
+        url: url,
+        method: method,
+        json: body,
+      }, function (err, message, response) {
+        if (err) {
+          console.log("Error connecting to Neural Now: " + message);
+          return callback();
+        }
+
+        callback(response);
+      });
+    }
   }
 }
 

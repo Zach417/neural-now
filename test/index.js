@@ -12,7 +12,7 @@ NeuralNowUtils.Image.resizeToVector({
   size: [256, 256, 3],
   path: __dirname + "/test.png",
   callback: function (vector) {
-    NeuralNow.compute('open_nsfw', vector, function (output) {
+    NeuralNow.compute('open-nsfw', vector, function (output) {
       console.log(output);
     });
   },
